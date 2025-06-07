@@ -86,7 +86,7 @@ class HSFZ(Packet):
 
     def hashret(self):
         # type: () -> bytes
-        hdr_hash = struct.pack("B", self.source ^ self.target)
+        hdr_hash = struct.pack("B", self.source ^ self.target) if self._hasaddrs() else b'\x00'
         pay_hash = self.payload.hashret()
         return hdr_hash + pay_hash
 
